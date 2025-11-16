@@ -1,19 +1,21 @@
 # Production Environment Variables Setup
 
-This document outlines the required environment variables for deploying to cPanel at `www.mejorrasales.com`.
+This document outlines the required environment variables for deploying to VPS at `mejorrasales.com` on port `5050`.
 
 ## 🔧 Required Environment Variables
 
 ### Frontend Environment Variables
 
-Set these in your **cPanel Node.js App Manager** for the frontend application:
+Set these in your **frontend `.env.production`** file for VPS deployment:
 
 ```env
 NODE_ENV=production
-PORT=3000
-NEXT_PUBLIC_API_URL=https://www.mejorrasales.com:5050/api
+PORT=5050
+HOST=0.0.0.0
+NEXT_PUBLIC_API_URL=https://mejorrasales.com:5050/api
 NEXT_PUBLIC_SUPABASE_URL=https://ussoyjjlauhggwsezbhy.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 ```
 
 **Important Notes:**
@@ -23,24 +25,25 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
 
 ### Backend Environment Variables
 
-Set these in your **cPanel Node.js App Manager** for the backend application:
+Set these in your **backend `.env`** file for VPS deployment:
 
 ```env
 NODE_ENV=production
 PORT=5050
 HOST=0.0.0.0
-FRONTEND_URL=https://www.mejorrasales.com
+FRONTEND_URL=https://mejorrasales.com
 DATABASE_URL=your_supabase_connection_string
 SUPABASE_URL=https://ussoyjjlauhggwsezbhy.supabase.co
 SUPABASE_ANON_KEY=your_supabase_anon_key_here
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
 JWT_SECRET=your_jwt_secret_here
 JWT_EXPIRE=7d
+GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 ```
 
 **Important Notes:**
 - `PORT=5050` - This is the port your backend runs on
-- `HOST=0.0.0.0` - Required for cPanel to bind to all interfaces
+- `HOST=0.0.0.0` - Required for VPS to bind to all interfaces
 - `FRONTEND_URL` - Used for CORS configuration
 - Use Supabase **Session Pooler** connection string (port 6543) for better performance:
   ```
@@ -68,17 +71,19 @@ JWT_EXPIRE=7d
 
 ## 🚀 Deployment Steps
 
-1. **Set Environment Variables in cPanel:**
-   - Go to **Node.js App Manager**
-   - Select your frontend app → **Environment Variables** → Add all frontend variables
-   - Select your backend app → **Environment Variables** → Add all backend variables
+1. **Set Environment Variables:**
+   - Create `backend/.env` with backend variables
+   - Create `frontend/.env.production` with frontend variables
+   - See `VPS_DEPLOYMENT.md` for detailed VPS setup instructions
 
-2. **Restart Applications:**
-   - Restart both frontend and backend apps in cPanel
+2. **Start Applications:**
+   - Use PM2: `pm2 start backend/server.js --name "mejorrasales-backend"`
+   - Use PM2: `pm2 start frontend/server.js --name "mejorrasales-frontend"`
+   - Or use systemd/service manager
 
 3. **Verify Configuration:**
-   - Test backend: `https://www.mejorrasales.com:5050/api/health`
-   - Test frontend: Visit `https://www.mejorrasales.com`
+   - Test backend: `https://mejorrasales.com:5050/api/health`
+   - Test frontend: Visit `https://mejorrasales.com:5050`
    - Try creating a business from the admin panel
 
 ## 🔍 Troubleshooting
@@ -109,8 +114,9 @@ JWT_EXPIRE=7d
 ## 📞 Support
 
 If issues persist:
-1. Check cPanel error logs: **Node.js App Manager** → Select app → **View Logs**
+1. Check PM2 logs: `pm2 logs` or application logs
 2. Verify all environment variables are set correctly
 3. Ensure Supabase project is active (not paused)
-4. Test backend API directly using curl or Postman
+4. Test backend API directly: `curl https://mejorrasales.com:5050/api/health`
+5. See `VPS_DEPLOYMENT.md` for detailed troubleshooting
 

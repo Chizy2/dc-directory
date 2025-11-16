@@ -119,6 +119,7 @@ app.listen(PORT, HOST, () => {
   console.log(`🚀 Server running on ${HOST}:${PORT}`);
   console.log(`📡 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔗 API available at: http://${HOST}:${PORT}/api`);
-  console.log(`🌐 Production API URL: https://www.mejorrasales.com:${PORT}/api`);
+  console.log(`🌐 Production API URL: https://mejorrasales.com:${PORT}/api`);
+  console.log(`🌐 Production API URL (www): https://www.mejorrasales.com:${PORT}/api`);
   console.log(`🔒 CORS configured for: ${corsOrigins.length > 0 ? corsOrigins.join(', ') : 'All origins'}`);
 });

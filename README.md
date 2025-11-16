@@ -213,18 +213,44 @@ This directory exists to strengthen the bonds of fellowship in the Body of Chris
 
 ## Deployment
 
-### Frontend (Vercel)
+### VPS Deployment (Recommended for mejorrasales.com)
+
+For deploying to a VPS server with domain `mejorrasales.com` on port `5050`:
+
+1. See **[VPS_DEPLOYMENT.md](./VPS_DEPLOYMENT.md)** for complete step-by-step guide
+2. Configure environment variables (see **[ENV_PRODUCTION.md](./ENV_PRODUCTION.md)**)
+3. Use PM2 to manage processes
+4. Set up Nginx reverse proxy (optional)
+5. Configure SSL with Let's Encrypt
+
+**Quick Start:**
+```bash
+# Backend
+cd backend
+npm install --production
+pm2 start server.js --name "mejorrasales-backend"
+
+# Frontend
+cd frontend
+npm install
+npm run build
+pm2 start server.js --name "mejorrasales-frontend"
+```
+
+### Alternative Deployment Options
+
+#### Frontend (Vercel)
 
 1. Push code to GitHub
 2. Import project in Vercel
 3. Configure environment variables
 4. Deploy
 
-### Backend (Render/AWS)
+#### Backend (Render/AWS)
 
-1. Set up PostgreSQL database
+1. Set up PostgreSQL database (or use Supabase)
 2. Configure environment variables
-3. Set up file storage for images (AWS S3 recommended)
+3. Set up file storage for images (Supabase Storage recommended)
 4. Deploy Node.js app
 
 ## Development

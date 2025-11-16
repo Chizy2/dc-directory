@@ -15,7 +15,8 @@ Add these to your **backend Node.js app** in cPanel:
 
 ```env
 NODE_ENV=production
-PORT=3000
+PORT=5050
+HOST=0.0.0.0
 
 # Database Connection (Use Session Pooler - port 6543)
 # Get from: Supabase Dashboard → Project Settings → Database → Connection Pooling → Session mode
@@ -33,7 +34,7 @@ SUPABASE_ANON_KEY=your_supabase_anon_key_here
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
 
 # Frontend URL (for CORS)
-FRONTEND_URL=https://yourdomain.com
+FRONTEND_URL=https://mejorrasales.com
 
 # Google Maps API (Optional)
 GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
@@ -47,10 +48,11 @@ Add these to your **frontend Node.js app** in cPanel:
 
 ```env
 NODE_ENV=production
-PORT=3000
+PORT=5050
+HOST=0.0.0.0
 
 # Next.js requires NEXT_PUBLIC_ prefix for client-side variables
-NEXT_PUBLIC_API_URL=https://yourdomain.com/api
+NEXT_PUBLIC_API_URL=https://mejorrasales.com:5050/api
 NEXT_PUBLIC_SUPABASE_URL=https://ussoyjjlauhggwsezbhy.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
@@ -95,13 +97,13 @@ Or use an online generator. Minimum 32 characters recommended.
 
 ### 5. FRONTEND_URL
 Your production domain:
-- `https://yourdomain.com`
-- `https://www.yourdomain.com` (if using www)
+- `https://mejorrasales.com`
+- `https://www.mejorrasales.com` (if using www)
 
 ### 6. NEXT_PUBLIC_API_URL
 Your backend API URL:
-- `https://yourdomain.com/api` (if backend is in subdirectory)
-- `https://api.yourdomain.com` (if using subdomain)
+- `https://mejorrasales.com:5050/api` (VPS deployment on port 5050)
+- `https://www.mejorrasales.com:5050/api` (if using www)
 
 ---
 

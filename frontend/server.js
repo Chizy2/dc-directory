@@ -1,8 +1,8 @@
 const next = require('next');
 const http = require('http');
 
-// cPanel requires using environment PORT
-const PORT = process.env.PORT || 3000;
+// VPS deployment - use port 5050
+const PORT = process.env.PORT || 5050;
 const HOST = process.env.HOST || '0.0.0.0';
 
 const app = next({ 
