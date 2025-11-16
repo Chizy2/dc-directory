@@ -215,7 +215,9 @@ This directory exists to strengthen the bonds of fellowship in the Body of Chris
 
 ### VPS Deployment (Recommended for mejorrasales.com)
 
-For deploying to a VPS server with domain `mejorrasales.com` on port `5050`:
+For deploying to a VPS server with domain `mejorrasales.com`:
+- **Backend**: Port `5050`
+- **Frontend**: Port `3000`
 
 1. See **[VPS_DEPLOYMENT.md](./VPS_DEPLOYMENT.md)** for complete step-by-step guide
 2. Configure environment variables (see **[ENV_PRODUCTION.md](./ENV_PRODUCTION.md)**)

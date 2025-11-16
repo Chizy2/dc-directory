@@ -1,6 +1,9 @@
 # 🚀 VPS Deployment Guide for mejorrasales.com
 
-This guide will help you deploy the Dominion City Directory application to a VPS server with the domain `mejorrasales.com` on port `5050` using Supabase.
+This guide will help you deploy the Dominion City Directory application to a VPS server with the domain `mejorrasales.com`:
+- **Backend**: Port `5050`
+- **Frontend**: Port `3000`
+- **Database**: Supabase
 
 ## 📋 Prerequisites
 
@@ -114,10 +117,11 @@ Create `/var/www/mejorrasales/frontend/.env.production`:
 
 ```env
 NODE_ENV=production
-PORT=5050
+PORT=3000
 HOST=0.0.0.0
 
 # Next.js requires NEXT_PUBLIC_ prefix for client-side variables
+# Backend API runs on port 5050
 NEXT_PUBLIC_API_URL=https://mejorrasales.com:5050/api
 NEXT_PUBLIC_SUPABASE_URL=https://ussoyjjlauhggwsezbhy.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
@@ -194,9 +198,9 @@ server {
     # Redirect HTTP to HTTPS (after SSL setup)
     # return 301 https://$server_name$request_uri;
 
-    # For now, proxy to port 5050
+    # Proxy frontend (port 3000) and backend API (port 5050)
     location / {
-        proxy_pass http://localhost:5050;
+        proxy_pass http://localhost:3000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -207,7 +211,7 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 
-    # API routes (if backend is separate)
+    # API routes - backend runs on port 5050
     location /api {
         proxy_pass http://localhost:5050;
         proxy_http_version 1.1;
@@ -259,7 +263,8 @@ After SSL is installed, update the Nginx config to redirect HTTP to HTTPS and us
 sudo ufw allow 22/tcp    # SSH
 sudo ufw allow 80/tcp    # HTTP
 sudo ufw allow 443/tcp   # HTTPS
-sudo ufw allow 5050/tcp  # Application port (if not using reverse proxy)
+sudo ufw allow 3000/tcp  # Frontend port (if not using reverse proxy)
+sudo ufw allow 5050/tcp  # Backend API port (if not using reverse proxy)
 sudo ufw enable
 ```
 
@@ -277,7 +282,7 @@ curl http://localhost:5050/api/health/db
 ### 9.2 Test Frontend
 
 Open in browser:
-- `http://mejorrasales.com:5050` (if not using reverse proxy)
+- `http://mejorrasales.com:3000` (if not using reverse proxy)
 - `http://mejorrasales.com` (if using reverse proxy)
 - `https://mejorrasales.com` (after SSL setup)
 
@@ -324,8 +329,9 @@ pm2 restart mejorrasales-frontend
 # Check PM2 logs
 pm2 logs
 
-# Check if port is in use
-sudo netstat -tulpn | grep 5050
+# Check if ports are in use
+sudo netstat -tulpn | grep 3000  # Frontend
+sudo netstat -tulpn | grep 5050  # Backend
 
 # Restart PM2
 pm2 restart all
@@ -411,7 +417,7 @@ See `ENV_PRODUCTION.md` for detailed information about each environment variable
 ## 🎉 Success Checklist
 
 - [ ] Backend running on port 5050
-- [ ] Frontend running on port 5050
+- [ ] Frontend running on port 3000
 - [ ] PM2 managing both processes
 - [ ] Nginx configured (if using reverse proxy)
 - [ ] SSL certificate installed
@@ -436,6 +442,7 @@ See `ENV_PRODUCTION.md` for detailed information about each environment variable
 
 **Last Updated**: [Date]
 **Domain**: mejorrasales.com
-**Port**: 5050
+**Backend Port**: 5050
+**Frontend Port**: 3000
 **Database**: Supabase
 

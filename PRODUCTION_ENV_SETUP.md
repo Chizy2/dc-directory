@@ -10,8 +10,9 @@ Set these in your **frontend `.env.production`** file for VPS deployment:
 
 ```env
 NODE_ENV=production
-PORT=5050
+PORT=3000
 HOST=0.0.0.0
+# Backend API runs on port 5050
 NEXT_PUBLIC_API_URL=https://mejorrasales.com:5050/api
 NEXT_PUBLIC_SUPABASE_URL=https://ussoyjjlauhggwsezbhy.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
@@ -19,9 +20,10 @@ NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 ```
 
 **Important Notes:**
-- `NEXT_PUBLIC_API_URL` must point to your backend API
+- Frontend runs on port `3000`
+- Backend runs on port `5050`
+- `NEXT_PUBLIC_API_URL` must point to your backend API (port 5050)
 - If your backend is accessible via reverse proxy at `https://www.mejorrasales.com/api` (without port), use that instead
-- The port `5050` is based on your backend configuration
 
 ### Backend Environment Variables
 
@@ -83,7 +85,7 @@ GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 
 3. **Verify Configuration:**
    - Test backend: `https://mejorrasales.com:5050/api/health`
-   - Test frontend: Visit `https://mejorrasales.com:5050`
+   - Test frontend: Visit `https://mejorrasales.com:3000`
    - Try creating a business from the admin panel
 
 ## 🔍 Troubleshooting

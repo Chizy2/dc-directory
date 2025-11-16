@@ -48,10 +48,11 @@ Add these to your **frontend Node.js app** in cPanel:
 
 ```env
 NODE_ENV=production
-PORT=5050
+PORT=3000
 HOST=0.0.0.0
 
 # Next.js requires NEXT_PUBLIC_ prefix for client-side variables
+# Backend API runs on port 5050
 NEXT_PUBLIC_API_URL=https://mejorrasales.com:5050/api
 NEXT_PUBLIC_SUPABASE_URL=https://ussoyjjlauhggwsezbhy.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
@@ -101,8 +102,8 @@ Your production domain:
 - `https://www.mejorrasales.com` (if using www)
 
 ### 6. NEXT_PUBLIC_API_URL
-Your backend API URL:
-- `https://mejorrasales.com:5050/api` (VPS deployment on port 5050)
+Your backend API URL (backend runs on port 5050, frontend on port 3000):
+- `https://mejorrasales.com:5050/api` (VPS deployment - backend port)
 - `https://www.mejorrasales.com:5050/api` (if using www)
 
 ---
