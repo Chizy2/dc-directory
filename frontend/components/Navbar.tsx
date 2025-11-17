@@ -18,9 +18,9 @@ export default function Navbar() {
             <Image
               src="/logo.svg"
               alt="Dominion City"
-              width={150}
-              height={60}
-              className="h-12 w-auto"
+              width={200}
+              height={80}
+              className="w-48 md:w-64 h-auto"
               priority
             />
           </Link>
