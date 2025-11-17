@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
@@ -13,8 +14,15 @@ export default function Navbar() {
     <nav className="bg-dominion-blue shadow-lg">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-white">
-            Dominion City
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.svg"
+              alt="Dominion City"
+              width={150}
+              height={60}
+              className="h-12 w-auto"
+              priority
+            />
           </Link>
           
           <div className="hidden md:flex items-center space-x-6">
